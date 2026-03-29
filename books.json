@@ -1,0 +1,20 @@
+[
+ {
+  "title": "Python Crash Course",
+  "author": "Eric Matthes",
+  "price": 29.99,
+  "in_stock": true
+ },
+ {
+  "title": "Automate the Boring Stuff",
+  "author": "Al Sweigart",
+  "price": 25.5,
+  "in_stock": true
+ },
+ {
+  "title": "Learning Python",
+  "author": "Mark Lutz",
+  "price": 45.0,
+  "in_stock": false
+ }
+]

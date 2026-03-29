@@ -1,0 +1,21 @@
+# PythonProject 忽略文件配置
+
+# 忽略 Python 运行时生成的缓存文件夹
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 忽略虚拟环境文件夹（非常重要，绝对不能把环境传到 GitHub）
+.venv/
+venv/
+env/
+ENV/
+
+# 忽略编辑器配置（可选，保持仓库纯净）
+.vscode/
+.idea/
+
+# 忽略本地生成的测试数据文件（可选，看您是否想把记的账也传上去）
+expenses.json
+my_diary.txt
+students.json

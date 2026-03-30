@@ -1,8 +1,5 @@
 id,name,department,salary
-E001,Alice,HR,8500
 E002,Bob,Engineering,15000
 E003,Charlie,Sales,12500
-E004,David,HR,9200
 E005,Eve,Engineering,18000
-E006,Frank,Marketing,9800
 E007,Grace,Sales,11000

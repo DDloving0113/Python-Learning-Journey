@@ -1,0 +1,5 @@
+department,count,total_salary,avg_salary
+HR,2,17700,8850.0
+Engineering,2,33000,16500.0
+Sales,2,23500,11750.0
+Marketing,1,9800,9800.0

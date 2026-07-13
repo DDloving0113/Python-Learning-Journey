@@ -197,6 +197,58 @@ for key, values in groups.items():
 
 ***
 
+## 8.1 字典分组统计（ex32 新理解）
+
+**一句话理解**：
+
+- 列表适合“顺着存”
+- 字典适合“按类别存”
+
+当题目里出现下面这些词时，要优先想到字典分组：
+
+- 按部门统计
+- 按班级统计
+- 按类别汇总
+- 按日期分组
+
+**通用模板**：
+
+```python
+stats = {}
+
+for item in data:
+    key = item["category"]
+    value = item["value"]
+
+    if key not in stats:
+        stats[key] = {
+            "count": 0,
+            "total": 0
+        }
+
+    stats[key]["count"] += 1
+    stats[key]["total"] += value
+
+for key in stats:
+    stats[key]["avg"] = stats[key]["total"] / stats[key]["count"]
+```
+
+**口诀**：
+
+1. 先找组
+2. 没组就建
+3. 有组就加
+4. 最后统一算结果
+
+**对应到 ex32 的意思**：
+
+- `department` 就是分组的 key
+- 每个部门都对应一个小统计字典
+- 里面保存 `count`、`total_salary`
+- 全部遍历完后，再统一补 `avg_salary`
+
+***
+
 ## 9. 文件读取四种姿势 (File Reading Cheatsheet)
 
 | 方法                   | 作用            | 返回类型              | 适用场景                 |
@@ -493,3 +545,268 @@ except ValueError:
 - 能写：只读 property（只有 getter）1 个
 - 能说明：什么时候用 property（需要规则/校验/派生值），什么时候直接用普通属性（纯数据）
 
+***
+
+## 15. CSV 模块速查（`csv` module）
+
+### 15.1 先记住 4 个主角
+
+- `csv.reader(f)`：按“列表”读 CSV
+- `csv.DictReader(f)`：按“字典”读 CSV，第一行默认当表头
+- `csv.writer(f)`：按“列表”写 CSV
+- `csv.DictWriter(f, fieldnames=...)`：按“字典”写 CSV
+
+一句话区分：
+
+- 读出来像 `["Tom", "18", "Beijing"]` 用 `reader`
+- 读出来像 `{"name": "Tom", "age": "18", "city": "Beijing"}` 用 `DictReader`
+- 写入一行是列表，用 `writer`
+- 写入一行是字典，用 `DictWriter`
+
+### 15.2 写 CSV 的固定 `open()` 模板
+
+```python
+with open("output.csv", "w", newline="", encoding="utf-8") as f:
+    ...
+```
+
+要点：
+
+- `"w"`：写模式
+- `newline=""`：防止写 CSV 时出现空行
+- `encoding="utf-8"`：避免中文乱码
+
+### 15.3 `csv.reader()`
+
+**作用**：逐行读取 CSV，每一行都是一个列表。
+
+**常见写法**：
+
+```python
+import csv
+
+with open("employees.csv", "r", encoding="utf-8") as f:
+    reader = csv.reader(f)
+    header = next(reader)
+    for row in reader:
+        print(row)
+```
+
+**必填参数**：
+
+- `f`：已经打开的文件对象
+
+**读出来的样子**：
+
+```python
+["Alice", "IT", "12000"]
+```
+
+**什么时候用**：
+
+- 文件结构很简单
+- 你知道第 0 列、第 1 列分别是什么
+- 不介意自己手动处理标题行
+
+### 15.4 `csv.DictReader()`
+
+**作用**：逐行读取 CSV，每一行都是一个字典，第一行默认作为字段名。
+
+**常见写法**：
+
+```python
+import csv
+
+with open("employees.csv", "r", encoding="utf-8") as f:
+    reader = csv.DictReader(f)
+    for row in reader:
+        print(row["name"], row["department"], row["salary"])
+```
+
+**必填参数**：
+
+- `f`：已经打开的文件对象
+
+**常用可选参数**：
+
+- `fieldnames=[...]`：手动指定字段名
+
+**读出来的样子**：
+
+```python
+{"name": "Alice", "department": "IT", "salary": "12000"}
+```
+
+**一句话记忆**：
+
+- `DictReader` 会把第一行自动当标题行
+- 所以平时最省事的读法就是它
+
+### 15.5 `csv.writer()`
+
+**作用**：把“列表形式”的一行一行数据写进 CSV。
+
+**常见写法**：
+
+```python
+import csv
+
+with open("students.csv", "w", newline="", encoding="utf-8") as f:
+    writer = csv.writer(f)
+    writer.writerow(["name", "age", "city"])
+    writer.writerow(["Tom", 18, "Beijing"])
+    writer.writerow(["Anna", 20, "Shanghai"])
+```
+
+**必填参数**：
+
+- `f`：已经打开的文件对象
+
+**常用方法**：
+
+- `writer.writerow(list)`：写一行
+- `writer.writerows(list_of_lists)`：批量写多行
+
+**适合场景**：
+
+- 你写的数据本来就是列表
+- 你愿意自己管理第一行表头
+
+### 15.6 `csv.DictWriter()`
+
+**作用**：把“字典形式”的一行一行数据写进 CSV。
+
+**常见写法**：
+
+```python
+import csv
+
+with open("department_stats.csv", "w", newline="", encoding="utf-8") as f:
+    fieldnames = ["department", "count", "total_salary", "avg_salary"]
+    writer = csv.DictWriter(f, fieldnames=fieldnames)
+    writer.writeheader()
+    writer.writerow({
+        "department": "IT",
+        "count": 3,
+        "total_salary": 30000,
+        "avg_salary": 10000
+    })
+```
+
+**必填参数**：
+
+- `f`：已经打开的文件对象
+- `fieldnames`：列名列表，也决定输出顺序
+
+**常用方法**：
+
+- `writer.writeheader()`：把 `fieldnames` 写成第一行表头
+- `writer.writerow(dict)`：写一行字典
+- `writer.writerows(list_of_dicts)`：批量写多行字典
+
+**一句话记忆**：
+
+- `DictWriter(...)` 只是告诉 Python 列有哪些
+- `writeheader()` 才是真正把标题行写进文件
+
+### 15.7 `writerow()` 和 `writerows()` 的区别
+
+```python
+writer.writerow(["Tom", 18, "Beijing"])
+```
+
+- 写 1 行
+
+```python
+writer.writerows([
+    ["Tom", 18, "Beijing"],
+    ["Anna", 20, "Shanghai"]
+])
+```
+
+- 一次写很多行
+
+如果是 `DictWriter`，就改成“字典列表”：
+
+```python
+writer.writerows([
+    {"department": "IT", "count": 3, "total_salary": 30000, "avg_salary": 10000},
+    {"department": "HR", "count": 2, "total_salary": 16000, "avg_salary": 8000}
+])
+```
+
+### 15.8 `writeheader()` 到底做了什么
+
+如果：
+
+```python
+fieldnames = ["department", "count", "total_salary", "avg_salary"]
+```
+
+执行：
+
+```python
+writer.writeheader()
+```
+
+CSV 第一行就会变成：
+
+```csv
+department,count,total_salary,avg_salary
+```
+
+所以：
+
+- 不写 `writeheader()`，通常就没有表头
+- `DictWriter` 不会自动帮你写标题行
+
+### 15.9 读写 CSV 的完整模板
+
+**按字典读取：**
+
+```python
+import csv
+
+with open("employees.csv", "r", encoding="utf-8") as f:
+    reader = csv.DictReader(f)
+    for row in reader:
+        name = row["name"]
+        department = row["department"]
+        salary = int(row["salary"])
+```
+
+**按字典写出：**
+
+```python
+import csv
+
+rows = [
+    {"department": "IT", "count": 3, "total_salary": 30000, "avg_salary": 10000},
+    {"department": "HR", "count": 2, "total_salary": 16000, "avg_salary": 8000}
+]
+
+with open("department_stats.csv", "w", newline="", encoding="utf-8") as f:
+    fieldnames = ["department", "count", "total_salary", "avg_salary"]
+    writer = csv.DictWriter(f, fieldnames=fieldnames)
+    writer.writeheader()
+    writer.writerows(rows)
+```
+
+### 15.10 你现在最该背下来的点
+
+- 读简单 CSV：`csv.reader(f)`
+- 读带标题 CSV：`csv.DictReader(f)`
+- 写列表行：`csv.writer(f)`
+- 写字典行：`csv.DictWriter(f, fieldnames=...)`
+- 写表头：`writeheader()`
+- 写一行：`writerow(...)`
+- 写多行：`writerows(...)`
+- 写 CSV 时固定加：`newline=""`
+
+### 15.11 CSV 模块常见坑
+
+- `DictWriter` 少写 `fieldnames` 会报错
+- `DictWriter` 不会自动写表头，要手动 `writeheader()`
+- `salary` 从 CSV 读出来通常是字符串，要先 `int()` 再计算
+- 写 CSV 时忘记 `newline=""`，可能出现空行
+- 读文件时，空格或脏数据最好先 `strip()` 再转换类型

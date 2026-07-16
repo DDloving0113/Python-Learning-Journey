@@ -19,3 +19,11 @@ ENV/
 expenses.json
 my_diary.txt
 students.json
+
+# 忽略临时 CSV 文件（演示练习用的，不需要同步）
+case*.csv
+demo_*.csv
+auto_fieldnames.csv
+city_stats.csv
+fund_analysis_result.csv
+pandas_orders.csv

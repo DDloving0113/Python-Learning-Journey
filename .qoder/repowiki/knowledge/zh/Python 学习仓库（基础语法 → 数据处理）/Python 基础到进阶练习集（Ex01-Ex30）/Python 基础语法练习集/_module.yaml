@@ -1,0 +1,28 @@
+schema_version: 1
+module_path: exercises_core/basic_syntax_exercises
+title: Python 基础语法练习集
+scope:
+    - ex01_calc_safe.py
+    - ex02_grade_level.py
+    - ex03_prime_tools.py
+    - ex04_cart_checkout.py
+    - ex05_log_stats.py
+    - ex06_student_scores.py
+    - ex07_user_clean.py
+    - ex08_log_file_analyzer.py
+    - ex09_word_counter_advanced.py
+    - ex10_filter_lambda.py
+    - ex11_map_reduce.py
+    - ex11_sorted_lambda_reduce.py
+    - ex12_employee_csv.py
+    - ex13_csv_robust.py
+    - ex14_json_basics.py
+    - ex15_student_scores.json
+    - ex15_student_scores_pro.py
+    - ex16_list_comprehension.py
+    - ex17_dict_comprehension.py
+    - ex18_data_cleaning_pipeline.py
+    - ex19_student_class.py
+source_files: []
+depends_on: []
+related_to: []

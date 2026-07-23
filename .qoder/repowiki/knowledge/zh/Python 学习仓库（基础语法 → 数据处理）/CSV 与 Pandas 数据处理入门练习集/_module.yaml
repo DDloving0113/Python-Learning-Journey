@@ -1,0 +1,25 @@
+schema_version: 1
+module_path: csv_pandas
+title: CSV 与 Pandas 数据处理入门练习集
+scope:
+    - ex32_csv_stats.py
+    - ex33_csv_stats_export.py
+    - ex34_department_top_earner.py
+    - ex35_fund_data_analysis.py
+    - ex36_pandas_data_cleaning.py
+    - pandas_1_read.py
+    - pandas_2_select_filter.py
+    - pandas_4_groupby.py
+    - pandas_df_vs_series.py
+    - pandas_dict_list_connection.py
+    - pandas_manual_create.py
+    - pandas_why_flexible.py
+    - practice_csv_advanced.py
+    - demo_auto_fieldnames.py
+    - demo_dict_loop.py
+    - demo_dict_values.py
+    - demo_fieldnames.py
+    - demo_fieldnames_rule.py
+source_files: []
+depends_on: []
+related_to: []

@@ -1,0 +1,8 @@
+schema_version: 1
+module_path: basics
+title: Python 基础语法练习集
+scope:
+    - 00_Basics/
+source_files: []
+depends_on: []
+related_to: []

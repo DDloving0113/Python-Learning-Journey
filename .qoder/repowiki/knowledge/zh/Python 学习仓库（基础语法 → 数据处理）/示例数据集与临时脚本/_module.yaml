@@ -1,0 +1,19 @@
+schema_version: 1
+module_path: data_samples
+title: 示例数据集与临时脚本
+scope:
+    - employees.csv
+    - orders.csv
+    - books.json
+    - books_updated.json
+    - fund_info.csv
+    - fund_nav.csv
+    - department_stats.csv
+    - department_top_earners.csv
+    - clean_employees.csv
+    - messy_employees.csv
+    - high_salary.csv
+    - temp.py
+source_files: []
+depends_on: []
+related_to: []

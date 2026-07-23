@@ -1,0 +1,22 @@
+schema_version: 1
+module_path: ""
+title: Python 学习仓库（基础语法 → 数据处理）
+scope:
+    - README.md
+    - .gitignore
+    - AI_交接卡片.md
+    - Python_学习进度档案.md
+    - 练习题目清单.md
+    - Python_练习知识库.md
+    - access.log
+    - ex26_class_attributes.py
+    - ex28_json_io.py
+    - ex29_exceptions.py
+    - ex31_csv_filter.py
+    - pandas_3_add_column_sort.py
+    - practice_dict_grouping.py
+    - project_expense_tracker.py
+    - test.txt
+source_files: []
+depends_on: []
+related_to: []

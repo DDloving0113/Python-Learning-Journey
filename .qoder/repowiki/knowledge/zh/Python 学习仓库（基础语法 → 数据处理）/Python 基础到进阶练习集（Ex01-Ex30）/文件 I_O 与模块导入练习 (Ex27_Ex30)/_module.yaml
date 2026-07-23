@@ -1,0 +1,10 @@
+schema_version: 1
+module_path: exercises_core/advanced_file_io
+title: 文件 I/O 与模块导入练习 (Ex27/Ex30)
+scope:
+    - ex27_file_io.py
+    - ex30_helper.py
+    - ex30_main.py
+source_files: []
+depends_on: []
+related_to: []

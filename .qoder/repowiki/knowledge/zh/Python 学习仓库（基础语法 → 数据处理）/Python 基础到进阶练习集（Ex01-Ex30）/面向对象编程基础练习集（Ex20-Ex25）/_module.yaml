@@ -1,0 +1,13 @@
+schema_version: 1
+module_path: exercises_core/oop_exercises
+title: 面向对象编程基础练习集（Ex20-Ex25）
+scope:
+    - ex20_magic_methods.py
+    - ex21_student_manager_oop.py
+    - ex22_understanding_self.py
+    - ex23_book_manager.py
+    - ex24_student_manager_container.py
+    - ex25_inheritance.py
+source_files: []
+depends_on: []
+related_to: []
